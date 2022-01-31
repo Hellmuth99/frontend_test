@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-// import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -16,28 +15,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 
 import { useNavigate } from "react-router-dom";
-
-// import Swal from "sweetalert2";
-// import Swal from "sweetalert2";
-
-// import Swal from "sweetalert2/dist/sweetalert2.js";
-// import "sweetalert2/src/sweetalert2.scss";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
-// import { BorderColorIcon, DeleteIcon } from "@mui/icons-material";
-// import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-
-import {
-  RequestAreas,
-  RequestProvincias,
-  RequestRegiones,
-  RequestCiudades,
-  InsertNewUser,
-  RequestCalles,
-  DelateModerador,
-} from "./api/requests";
 import swal from "sweetalert";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -73,13 +53,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const swal = new Swal();
 export default function BasicTable() {
-  const [id, setId] = useState(null);
-  const [show, setShow] = useState(false);
   const classes = useStyles();
-  const [mensaje, setMensaje] = useState("");
-  const [severity, setSeverity] = useState("success");
   const navigate = useNavigate();
 
   const [calles, setCalles] = useState([]);
@@ -99,51 +74,7 @@ export default function BasicTable() {
   useEffect(() => {
     Listar();
   }, []);
-  // useEffect(() => {
-  //   RequestCalles().then((data) => {
-  //     setCalles(data);
-  //   });
-  // }, []);
 
-  // console.log(calles);
-  //________________________________________________________
-
-  // const Eliminar = (id) => {
-  //   axios.delete(`http://postulacion_back.test/api/calles/datos/${id}`).then(
-  //     (response) => {
-  //       if (response.status == 200) {
-  //         alert("ELIMINACION CORRECTA");
-  //         // Listar();
-  //         // Limpiar();
-  //       }
-  //     },
-
-  //     (error) => {
-  //       alert("error al registrar");
-  //     }
-  //   );
-  // };
-
-  // const Eliminar = (id) => {
-  //   swal({
-  //     title: "Are you sure?",
-  //     text: "Once deleted, you will not be able to recover this imaginary file!",
-  //     icon: "warning",
-  //     buttons: true,
-  //     dangerMode: true,
-  //   });
-  //   axios
-  //     .delete(`http://postulacion_back.test/api/calles/datos/${id}`)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         swal("Calle eliminada con éxito", {
-  //           icon: "success",
-  //         });
-  //       } else {
-  //         swal("La Calle no ha sido Borrada");
-  //       }
-  //     });
-  // };
   const Eliminar = (id) => {
     swal({
       title: "¿Estás seguro de eliminar la calle?",
@@ -173,93 +104,9 @@ export default function BasicTable() {
     });
   };
 
-  // const Eliminar = (id) => {
-  //   axios
-  //     .delete(`http://postulacion_back.test/api/calles/datos/${id}`)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         swal("calle eliminada con éxito");
-  //         Listar();
-  //         // handleClick();
-  //         // setSeverity("info");
-  //         // setMensaje("Calle Borrada con Exito");
-  //       } else {
-  //         Listar();
-  //         // handleClick();
-  //         // setSeverity("error");
-  //         // setMensaje("La Calle no ha sido Borrada");
-  //       }
-  //     });
-  // };
-  // const Eliminar = () => {
-  //   DelateModerador({ calle_id: id });
-  // };
-
-  // const borrarCalle = (id) => {
-  //   const response = fetch(
-  //     `http://postulacion_back.test/api/calles/datos/${id}`,
-  //     {
-  //       method: "delete",
-  //     }
-  //   ).then((response) => {
-  //     if (response.status === 204) {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Moderador eliminado con exito!",
-  //         showConfirmButton: false,
-  //         showClass: {
-  //           popup: "animate__animated animate__fadeInDown",
-  //         },
-  //         hideClass: {
-  //           popup: "animate__animated animate__fadeOutUp",
-  //         },
-  //         timer: 2500,
-  //       });
-  //       RequestCalles();
-  //       // handleClick();
-  //       setSeverity("info");
-  //       setMensaje("Calle Borrada con Exito");
-  //     } else {
-  //       RequestCalles();
-  //       // handleClick();
-  //       setSeverity("error");
-  //       setMensaje("La Calle no ha sido Borrada");
-  //     }
-  //   });
-  // };
-
-  // const mostrarAlerta = () => {
-  //   console.log("aqui");
-  //   swal({
-  //     title: "Auto close alert!",
-  //     text: "¿Estás seguro que deseas eliminar esta calle?",
-  //     icon: "warning",
-  //     button: "aceptar",
-  //     // timer: 2000,
-  //     // buttons: ["no", "si"],
-  //     // showCancelButton: false,
-  //     // showConfirmButton: false,
-  //   });
-  // }).then(
-  //   function () {},
-  //   // handling the promise rejection
-  //   function (dismiss) {
-  //     if (dismiss === "timer") {
-  //       //console.log('I was closed by the timer')
-  //     }
-  //   }
-  // );
-  // };
-
-  // const mostrarAlerta = () => {
-  //   Swal("esta es una alert");
-  // };
-
   return (
     <Grid
       container
-      // width="100px"
-      // height="100px"
       spacing={0}
       direction="column"
       alignItems="center"
@@ -270,23 +117,9 @@ export default function BasicTable() {
         <h1 style={{ color: "white" }}>Tabla de calles</h1>
       </Grid>
       <Grid item xs={6}>
-        {/* <div>
-          <Button
-            variant="contained"
-            style={{
-              width: "100%",
-              marginLeft: "310%",
-            }}
-            onClick={() => setShow(true)}
-          >
-            Nueva Calle
-          </Button>
-          <Modal onClose={() => setShow(false)} show={show} />
-        </div> */}
         <div>
           <Button
             variant="contained"
-            // color="success"
             startIcon={<AddIcon />}
             style={{
               width: "100%",
@@ -297,24 +130,14 @@ export default function BasicTable() {
             Agregar Calle
           </Button>
         </div>
-        {/* <Button variant="contained" href="/modal">
-          Nueva Calle
-        </Button> */}
       </Grid>
 
       <Grid item xs={6}>
         <TableContainer component={Paper}>
-          {/* <div>
-            <h1>Tabla</h1>
-            <Button variant="contained" href="#contained-buttons">
-              Link
-            </Button>
-          </div> */}
           <Table
             sx={{ minWidth: 1000 }} //ancho de la tabla
             aria-label="customized table"
             position="absolute"
-            // width="500px"
             justifyContent="center"
             alignItems="center"
             border-spacing="10px 5px"
@@ -335,13 +158,6 @@ export default function BasicTable() {
                   key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {/* <TableCell align="center">{row.idCalle}</TableCell>
-                  <TableCell align="center">{row.nombreCalle}</TableCell>
-                  <TableCell align="center">{row.nombreCiudad}</TableCell>
-                  <TableCell align="center">{row.nombreProvincia}</TableCell>
-                  <TableCell align="center">{row.nombreRegion}</TableCell>
-                  <TableCell align="center"> */}
-
                   <TableCell align="center">{row.calle_id}</TableCell>
                   <TableCell align="center">{row.calle_nombre}</TableCell>
                   <TableCell align="center">{row.ciudad_nombre}</TableCell>
@@ -358,15 +174,6 @@ export default function BasicTable() {
                       Editar
                     </Button>
 
-                    {/* <Button
-                      fullWidth
-                      variant="contained"
-                      color="secondary"
-                      className={classes.submit}
-                      onClick={() => borrarCalle(row.idCalle)}
-                    >
-                      Eliminar
-                    </Button> */}
                     <Button
                       fullWidth
                       variant="contained"
