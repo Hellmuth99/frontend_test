@@ -7,10 +7,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Grid } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@mui/icons-material/Edit";
+import { useParams } from "react-router-dom";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchBar from "material-ui-search-bar";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -56,11 +59,13 @@ const useStyles = makeStyles((theme) => ({
 export default function BasicTable() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { nombre } = useParams();
 
   const [calles, setCalles] = useState([]);
+  const [searched, setSearched] = useState([]);
 
   const Listar = () => {
-    axios.get(`http://postulacion_back.test/api/callesdatos`).then(
+    axios.get`http://postulacion_back.test/api/callesdatos`.then(
       (response) => {
         setCalles(response.data);
       },
@@ -71,8 +76,21 @@ export default function BasicTable() {
     );
   };
 
+  const Listar2 = async (nombre) => {
+    const response = await fetch(
+      `http://postulacion_back.test/api/callesdatos2/${nombre}`
+    );
+    const data = await response.json();
+
+    console.log(data);
+  };
+
   useEffect(() => {
     Listar();
+  }, []);
+
+  useEffect(() => {
+    Listar2();
   }, []);
 
   const Eliminar = (id) => {
@@ -102,6 +120,19 @@ export default function BasicTable() {
         Listar();
       }
     });
+  };
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = calles.filter((row) => {
+      return row.calle_nombre.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setCalles(filteredRows);
+  };
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+    Listar();
   };
 
   return (
@@ -134,6 +165,11 @@ export default function BasicTable() {
 
       <Grid item xs={6}>
         <TableContainer component={Paper}>
+          <SearchBar
+            value={searched}
+            onChange={(searchVal) => requestSearch(searchVal)}
+            onCancelSearch={() => cancelSearch()}
+          />
           <Table
             sx={{ minWidth: 1000 }} //ancho de la tabla
             aria-label="customized table"

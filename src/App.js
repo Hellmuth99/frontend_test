@@ -14,6 +14,7 @@ function App() {
         <Route exact path="/editar/:id" element={<Calle />} />
         <Route exact path="/agregar" element={<Calle />} />
         <Route exact path="/agregar" element={<Calle />} />
+        <Route exact path="/agregar2" element={<Calle />} />
       </Routes>
     </Router>
   );
