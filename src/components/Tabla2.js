@@ -62,7 +62,7 @@ export default function BasicTable() {
   const { nombre } = useParams();
 
   const [calles, setCalles] = useState([]);
-  const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState("");
 
   const Listar = () => {
     axios.get`http://postulacion_back.test/api/callesdatos`.then(
@@ -76,22 +76,22 @@ export default function BasicTable() {
     );
   };
 
-  const Listar2 = async (nombre) => {
-    const response = await fetch(
-      `http://postulacion_back.test/api/callesdatos2/${nombre}`
-    );
-    const data = await response.json();
+  // const Listar2 = async (nombre) => {
+  //   const response = await fetch(
+  //     `http://postulacion_back.test/api/callesdatos2/${nombre}`
+  //   );
+  //   const data = await response.json();
 
-    console.log(data);
-  };
+  //   console.log(data);
+  // };
 
   useEffect(() => {
     Listar();
   }, []);
 
-  useEffect(() => {
-    Listar2();
-  }, []);
+  // useEffect(() => {
+  //   Listar2();
+  // }, []);
 
   const Eliminar = (id) => {
     swal({
@@ -130,9 +130,11 @@ export default function BasicTable() {
   };
 
   const cancelSearch = () => {
+    console.log("aqui");
     setSearched("");
-    requestSearch(searched);
     Listar();
+    requestSearch(searched);
+    // Listar();
   };
 
   return (
